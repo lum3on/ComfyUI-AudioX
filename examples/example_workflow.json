@@ -1,0 +1,254 @@
+{
+  "last_node_id": 7,
+  "last_link_id": 6,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "AudioXModelLoader",
+      "pos": [100, 100],
+      "size": [300, 100],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "model",
+          "type": "AUDIOX_MODEL",
+          "links": [1, 2, 3],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AudioXModelLoader"
+      },
+      "widgets_values": [
+        "HKUSTAudio/AudioX",
+        "auto"
+      ]
+    },
+    {
+      "id": 2,
+      "type": "AudioXTextToAudio",
+      "pos": [500, 50],
+      "size": [400, 200],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "AUDIOX_MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [4],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "sample_rate",
+          "type": "INT",
+          "links": [5],
+          "shape": 3,
+          "slot_index": 1
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AudioXTextToAudio"
+      },
+      "widgets_values": [
+        "Typing on a keyboard",
+        250,
+        7.0,
+        -1,
+        10.0
+      ]
+    },
+    {
+      "id": 3,
+      "type": "AudioXTextToMusic",
+      "pos": [500, 300],
+      "size": [400, 200],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "AUDIOX_MODEL",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [],
+          "shape": 3
+        },
+        {
+          "name": "sample_rate",
+          "type": "INT",
+          "links": [],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AudioXTextToMusic"
+      },
+      "widgets_values": [
+        "A music with piano and violin",
+        250,
+        7.0,
+        -1,
+        10.0
+      ]
+    },
+    {
+      "id": 4,
+      "type": "AudioXMultiModalGeneration",
+      "pos": [500, 550],
+      "size": [400, 250],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "AUDIOX_MODEL",
+          "link": 3
+        },
+        {
+          "name": "video",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": null
+        },
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [],
+          "shape": 3
+        },
+        {
+          "name": "sample_rate",
+          "type": "INT",
+          "links": [],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AudioXMultiModalGeneration"
+      },
+      "widgets_values": [
+        "Generate audio",
+        250,
+        7.0,
+        -1,
+        10.0
+      ]
+    },
+    {
+      "id": 5,
+      "type": "AudioXAudioProcessor",
+      "pos": [1000, 50],
+      "size": [300, 150],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "link": 4
+        },
+        {
+          "name": "sample_rate",
+          "type": "INT",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "audio",
+          "type": "AUDIO",
+          "links": [],
+          "shape": 3
+        },
+        {
+          "name": "sample_rate",
+          "type": "INT",
+          "links": [],
+          "shape": 3
+        },
+        {
+          "name": "info",
+          "type": "STRING",
+          "links": [6],
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "AudioXAudioProcessor"
+      },
+      "widgets_values": [
+        48000,
+        true,
+        "keep"
+      ]
+    },
+    {
+      "id": 6,
+      "type": "ShowText",
+      "pos": [1400, 50],
+      "size": [300, 100],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 6,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText"
+      },
+      "widgets_values": [
+        ""
+      ]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 2, 0, "AUDIOX_MODEL"],
+    [2, 1, 0, 3, 0, "AUDIOX_MODEL"],
+    [3, 1, 0, 4, 0, "AUDIOX_MODEL"],
+    [4, 2, 0, 5, 0, "AUDIO"],
+    [5, 2, 1, 5, 1, "INT"],
+    [6, 5, 2, 6, 0, "STRING"]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

@@ -1,0 +1,307 @@
+{
+  "last_node_id": 12,
+  "last_link_id": 15,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "AudioXModelLoader",
+      "pos": [50, 50],
+      "size": {"0": 315, "1": 126},
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {"name": "model", "type": "AUDIOX_MODEL", "links": [1, 2], "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "AudioXModelLoader"},
+      "widgets_values": ["AudioX.ckpt", "auto", "auto"]
+    },
+    {
+      "id": 2,
+      "type": "VHS_LoadVideoPath",
+      "pos": [50, 220],
+      "size": {"0": 315, "1": 178},
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [3], "shape": 3},
+        {"name": "frame_count", "type": "INT", "links": null},
+        {"name": "audio", "type": "AUDIO", "links": null},
+        {"name": "video_info", "type": "VHS_VIDEOINFO", "links": null}
+      ],
+      "properties": {"Node name for S&R": "VHS_LoadVideoPath"},
+      "widgets_values": {
+        "video": "input/sample_video.mp4",
+        "force_rate": 0,
+        "force_size": "Disabled",
+        "custom_width": 512,
+        "custom_height": 512,
+        "frame_load_cap": 0,
+        "skip_first_frames": 0,
+        "select_every_nth": 1
+      }
+    },
+    {
+      "id": 3,
+      "type": "AudioXVideoMuter",
+      "pos": [420, 220],
+      "size": {"0": 315, "1": 78},
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [
+        {"name": "video", "type": "IMAGE", "link": 3}
+      ],
+      "outputs": [
+        {"name": "muted_video", "type": "IMAGE", "links": [4, 5], "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "AudioXVideoMuter"},
+      "widgets_values": [true]
+    },
+    {
+      "id": 4,
+      "type": "AudioXVideoToAudio",
+      "pos": [420, 350],
+      "size": {"0": 315, "1": 198},
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "AUDIOX_MODEL", "link": 1},
+        {"name": "video", "type": "IMAGE", "link": 4}
+      ],
+      "outputs": [
+        {"name": "audio", "type": "AUDIO", "links": [6], "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "AudioXVideoToAudio"},
+      "widgets_values": [
+        "Generate realistic audio that matches the visual content of this video",
+        250,
+        7.0,
+        42,
+        10.0
+      ]
+    },
+    {
+      "id": 5,
+      "type": "AudioXVideoToMusic",
+      "pos": [420, 600],
+      "size": {"0": 315, "1": 198},
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {"name": "model", "type": "AUDIOX_MODEL", "link": 2},
+        {"name": "video", "type": "IMAGE", "link": 5}
+      ],
+      "outputs": [
+        {"name": "audio", "type": "AUDIO", "links": [7], "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "AudioXVideoToMusic"},
+      "widgets_values": [
+        "Generate cinematic background music that complements the mood and atmosphere of this video",
+        250,
+        7.0,
+        123,
+        10.0
+      ]
+    },
+    {
+      "id": 6,
+      "type": "AudioXVideoAudioCombiner",
+      "pos": [790, 350],
+      "size": {"0": 315, "1": 126},
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {"name": "video", "type": "IMAGE", "link": 8},
+        {"name": "audio", "type": "AUDIO", "link": 6}
+      ],
+      "outputs": [
+        {"name": "video", "type": "IMAGE", "links": [10], "shape": 3},
+        {"name": "synced_audio", "type": "AUDIO", "links": [11], "shape": 3},
+        {"name": "info", "type": "STRING", "links": [12], "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "AudioXVideoAudioCombiner"},
+      "widgets_values": [true, false]
+    },
+    {
+      "id": 7,
+      "type": "AudioXVideoAudioCombiner",
+      "pos": [790, 600],
+      "size": {"0": 315, "1": 126},
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {"name": "video", "type": "IMAGE", "link": 9},
+        {"name": "audio", "type": "AUDIO", "link": 7}
+      ],
+      "outputs": [
+        {"name": "video", "type": "IMAGE", "links": [13], "shape": 3},
+        {"name": "synced_audio", "type": "AUDIO", "links": [14], "shape": 3},
+        {"name": "info", "type": "STRING", "links": [15], "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "AudioXVideoAudioCombiner"},
+      "widgets_values": [true, true]
+    },
+    {
+      "id": 8,
+      "type": "PrimitiveNode",
+      "pos": [790, 220],
+      "size": {"0": 210, "1": 82},
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "outputs": [
+        {"name": "IMAGE", "type": "IMAGE", "links": [8, 9], "shape": 3}
+      ],
+      "title": "Muted Video Distribution",
+      "properties": {},
+      "widgets_values": [""]
+    },
+    {
+      "id": 9,
+      "type": "VHS_VideoCombine",
+      "pos": [1160, 350],
+      "size": {"0": 315, "1": 298},
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 10},
+        {"name": "audio", "type": "AUDIO", "link": 11}
+      ],
+      "outputs": [
+        {"name": "Filenames", "type": "VHS_FILENAMES", "links": null, "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "VHS_VideoCombine"},
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AudioX_VideoToAudio",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true
+      }
+    },
+    {
+      "id": 10,
+      "type": "VHS_VideoCombine",
+      "pos": [1160, 700],
+      "size": {"0": 315, "1": 298},
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {"name": "images", "type": "IMAGE", "link": 13},
+        {"name": "audio", "type": "AUDIO", "link": 14}
+      ],
+      "outputs": [
+        {"name": "Filenames", "type": "VHS_FILENAMES", "links": null, "shape": 3}
+      ],
+      "properties": {"Node name for S&R": "VHS_VideoCombine"},
+      "widgets_values": {
+        "frame_rate": 8,
+        "loop_count": 0,
+        "filename_prefix": "AudioX_VideoToMusic",
+        "format": "video/h264-mp4",
+        "pix_fmt": "yuv420p",
+        "crf": 19,
+        "save_metadata": true,
+        "pingpong": false,
+        "save_output": true
+      }
+    },
+    {
+      "id": 11,
+      "type": "ShowText|pysssss",
+      "pos": [1160, 220],
+      "size": {"0": 315, "1": 98},
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {"name": "text", "type": "STRING", "link": 12}
+      ],
+      "outputs": [
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "ShowText|pysssss"},
+      "widgets_values": [""]
+    },
+    {
+      "id": 12,
+      "type": "ShowText|pysssss",
+      "pos": [1160, 1050],
+      "size": {"0": 315, "1": 98},
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {"name": "text", "type": "STRING", "link": 15}
+      ],
+      "outputs": [
+        {"name": "STRING", "type": "STRING", "links": null}
+      ],
+      "properties": {"Node name for S&R": "ShowText|pysssss"},
+      "widgets_values": [""]
+    }
+  ],
+  "links": [
+    [1, 1, 0, 4, 0, "AUDIOX_MODEL"],
+    [2, 1, 0, 5, 0, "AUDIOX_MODEL"],
+    [3, 2, 0, 3, 0, "IMAGE"],
+    [4, 3, 0, 4, 1, "IMAGE"],
+    [5, 3, 0, 5, 1, "IMAGE"],
+    [6, 4, 0, 6, 1, "AUDIO"],
+    [7, 5, 0, 7, 1, "AUDIO"],
+    [8, 8, 0, 6, 0, "IMAGE"],
+    [9, 8, 0, 7, 0, "IMAGE"],
+    [10, 6, 0, 9, 0, "IMAGE"],
+    [11, 6, 1, 9, 1, "AUDIO"],
+    [12, 6, 2, 11, 0, "STRING"],
+    [13, 7, 0, 10, 0, "IMAGE"],
+    [14, 7, 1, 10, 1, "AUDIO"],
+    [15, 7, 2, 12, 0, "STRING"]
+  ],
+  "groups": [
+    {
+      "title": "Input & Model Loading",
+      "bounding": [30, -10, 360, 450],
+      "color": "#3f789e",
+      "font_size": 24
+    },
+    {
+      "title": "Video Muting & Audio Generation",
+      "bounding": [400, 140, 360, 700],
+      "color": "#8A8",
+      "font_size": 24
+    },
+    {
+      "title": "Audio-Video Synchronization",
+      "bounding": [770, 140, 360, 620],
+      "color": "#A88",
+      "font_size": 24
+    },
+    {
+      "title": "Final Video Export",
+      "bounding": [1140, 140, 360, 1020],
+      "color": "#88A",
+      "font_size": 24
+    }
+  ],
+  "config": {},
+  "extra": {
+    "ds": {
+      "scale": 0.8,
+      "offset": [-50, 50]
+    }
+  },
+  "version": 0.4
+}
