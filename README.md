@@ -1,5 +1,6 @@
 # ComfyUI-AudioX
 
+#THIS REPO IS WIP
 A powerful audio generation extension for ComfyUI that integrates AudioX models for high-quality audio synthesis from text and video inputs.
 
 ## 🎵 Features
@@ -8,18 +9,8 @@ A powerful audio generation extension for ComfyUI that integrates AudioX models 
 - **Text to Music**: Create musical compositions from text prompts
 - **Video to Audio**: Extract and generate audio from video content
 - **Video Processing**: Mute videos and combine with generated audio
-- **Multi-Modal Generation**: Advanced audio generation combining text and video inputs
-- **Flexible Model Loading**: Support for various AudioX models with device selection
 
 ## 🚀 Installation
-
-### Method 1: ComfyUI Manager (Recommended)
-1. Open ComfyUI Manager
-2. Search for "AudioX"
-3. Install "ComfyUI-AudioX"
-4. Restart ComfyUI
-
-### Method 2: Manual Installation
 ```bash
 cd ComfyUI/custom_nodes
 git clone https://github.com/your-username/ComfyUI-AudioX.git
@@ -37,7 +28,6 @@ pip install -r requirements.txt
 - **AudioX Video to Music**: Create musical soundtracks for videos
 
 ### Processing Nodes
-- **AudioX Multi-Modal Generation**: Advanced generation with multiple inputs
 - **AudioX Audio Processor**: Process and enhance audio
 - **AudioX Video Muter**: Remove audio from video files
 - **AudioX Video Audio Combiner**: Combine video with generated audio
