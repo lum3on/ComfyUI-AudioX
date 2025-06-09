@@ -1,6 +1,4 @@
-# ComfyUI-AudioX
-
-# THIS REPO IS WIP
+# ComfyUI-AudioX (WIP repo)
 
 A powerful audio generation extension for ComfyUI that integrates AudioX models for high-quality audio synthesis from text and video inputs.
 
